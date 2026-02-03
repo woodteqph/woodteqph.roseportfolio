@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Woodteqph Prime Corporation | Digital Business Card</title>
     <!-- Bootstrap 5 CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Dark mode colors (default) */
+            /* Mobile-first colors */
             --primary-black: #000000;
             --dark-black: #121212;
             --light-black: #1a1a1a;
@@ -61,6 +61,12 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
         }
         
         body {
@@ -69,6 +75,9 @@
             color: var(--text-light);
             line-height: 1.6;
             transition: all 0.3s ease;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
         h1, h2, h3, h4, h5 {
@@ -79,8 +88,8 @@
         /* Dark/Light Mode Toggle */
         .theme-toggle {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
             z-index: 1001;
         }
         
@@ -98,9 +107,10 @@
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
             transition: all 0.3s ease;
+            touch-action: manipulation;
         }
         
-        .theme-btn:hover {
+        .theme-btn:hover, .theme-btn:active {
             transform: rotate(30deg);
             box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
         }
@@ -117,11 +127,11 @@
             display: none;
         }
         
-        /* Modern Header - BINAGO: Walang yellow box */
+        /* Modern Header - Mobile First */
         .modern-header {
             background: var(--header-bg);
-            padding: 15px 0;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 12px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -133,19 +143,20 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 0 15px;
         }
         
         .logo-brand {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             text-decoration: none;
         }
         
-        /* LOGO CONTAINER - Walang yellow box */
+        /* LOGO CONTAINER */
         .logo-container {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -156,7 +167,7 @@
         .logo-container img {
             width: 100%;
             height: auto;
-            max-height: 60px;
+            max-height: 50px;
             object-fit: contain;
         }
         
@@ -166,45 +177,49 @@
         }
         
         .logo-main {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             color: var(--text-light);
             line-height: 1.2;
         }
         
         .logo-sub {
-            font-size: 10px;
+            font-size: 9px;
             color: var(--accent-gold);
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             text-transform: uppercase;
         }
         
         /* Main Content */
         .main-content {
-            padding: 30px 0 50px;
+            padding: 20px 0 40px;
             background: var(--main-bg);
-            min-height: calc(100vh - 140px);
+            min-height: calc(100vh - 120px);
             transition: all 0.3s ease;
+        }
+        
+        .container {
+            padding-left: 15px;
+            padding-right: 15px;
         }
         
         /* Profile Card */
         .profile-card {
             background: var(--card-bg);
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             border: 1px solid rgba(212, 175, 55, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        .profile-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        .profile-card:active {
+            transform: scale(0.99);
         }
         
         .profile-header {
-            padding: 40px 20px;
+            padding: 30px 15px;
             text-align: center;
             position: relative;
             background: var(--header-bg);
@@ -212,50 +227,50 @@
         
         .profile-badge {
             position: absolute;
-            top: 25px;
-            right: 25px;
+            top: 20px;
+            right: 20px;
             background: var(--accent-gold);
             color: var(--primary-black);
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-size: 13px;
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 12px;
             font-weight: 600;
-            box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 3px 8px rgba(212, 175, 55, 0.3);
         }
         
         .profile-img-container {
             position: relative;
             display: inline-block;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         
         .profile-img {
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             object-fit: cover;
             border-radius: 50%;
             border: 4px solid var(--accent-gold);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
         }
         
         .profile-verify {
             position: absolute;
-            bottom: 15px;
-            right: 15px;
+            bottom: 10px;
+            right: 10px;
             background: var(--accent-gold);
             color: var(--primary-black);
-            width: 28px;
-            height: 28px;
+            width: 25px;
+            height: 25px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 13px;
+            font-size: 12px;
         }
         
         .profile-name {
-            font-size: 32px;
-            margin-bottom: 8px;
+            font-size: 26px;
+            margin-bottom: 6px;
             background: linear-gradient(90deg, var(--accent-gold), var(--light-gold));
             -webkit-background-clip: text;
             background-clip: text;
@@ -265,38 +280,33 @@
         
         .profile-title {
             color: var(--text-gray);
-            font-size: 18px;
-            margin-bottom: 12px;
+            font-size: 16px;
+            margin-bottom: 10px;
             font-weight: 500;
         }
         
         .profile-company {
             color: var(--text-light);
-            font-size: 22px;
+            font-size: 18px;
             font-weight: 600;
             letter-spacing: 0.5px;
         }
         
         .profile-intro {
-            margin-top: 20px;
-            padding: 15px;
+            margin-top: 15px;
+            padding: 12px;
             background: rgba(212, 175, 55, 0.05);
-            border-radius: 15px;
+            border-radius: 12px;
             border: 1px solid rgba(212, 175, 55, 0.1);
+            font-size: 14px;
         }
         
-        .profile-intro p {
-            font-size: 15px;
-            color: var(--text-gray);
-            margin-bottom: 0;
-        }
-        
-        /* Tap Action Buttons Grid */
+        /* Tap Action Buttons Grid - Mobile First */
         .tap-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            padding: 0 20px;
+            gap: 12px;
+            padding: 0 15px;
             margin-bottom: 25px;
         }
         
@@ -304,7 +314,7 @@
             background: var(--tap-card-bg);
             border: 1px solid var(--tap-card-border);
             border-radius: 15px;
-            padding: 20px;
+            padding: 18px 12px;
             text-align: center;
             text-decoration: none;
             color: var(--text-light);
@@ -312,222 +322,293 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            touch-action: manipulation;
+            user-select: none;
         }
         
-        .tap-card:hover {
+        .tap-card:active {
+            transform: scale(0.97);
             background: rgba(212, 175, 55, 0.1);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.15);
         }
         
         .tap-icon {
-            font-size: 32px;
-            margin-bottom: 12px;
+            font-size: 28px;
+            margin-bottom: 10px;
             color: var(--accent-gold);
         }
         
         .tap-label {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
         
         .tap-desc {
-            font-size: 11px;
+            font-size: 10px;
             color: var(--text-gray);
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
+            opacity: 0.8;
         }
         
-        .tap-card:hover .tap-desc {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* TikTok Video Links */
-        .tiktok-video-section {
-            padding: 0 20px;
-            margin-bottom: 30px;
-        }
-        
-        .reels-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .reel-item {
+        /* SERVICES SECTION - Mobile First */
+        .services-section {
+            padding: 0 15px;
+            margin-bottom: 35px;
             position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            cursor: pointer;
-            background: var(--dark-black);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s ease;
-            height: 280px;
-            aspect-ratio: 9/16;
-            display: block;
-            text-decoration: none;
         }
         
-        .reel-item:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent-gold);
-            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.25);
+        .services-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--accent-gold);
+            position: relative;
         }
         
-        .reel-thumbnail {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .reel-item:hover .reel-thumbnail {
-            transform: scale(1.05);
-        }
-        
-        .tt-icon {
+        .services-header:after {
+            content: '';
             position: absolute;
-            top: 15px;
-            right: 15px;
-            background: linear-gradient(135deg, #000000, #25F4EE, #FE2C55);
-            color: white;
+            bottom: -5px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-gold), transparent);
+            border-radius: 3px;
+        }
+        
+        .services-icon {
+            color: var(--accent-gold);
+            font-size: 22px;
+        }
+        
+        .services-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 0.5px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 10px;
+        }
+        
+        .service-card {
+            background: var(--tap-card-bg);
+            border: 1px solid var(--tap-card-border);
+            border-radius: 15px;
+            padding: 20px 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 130px;
+            touch-action: manipulation;
+        }
+        
+        .service-card:active {
+            transform: scale(0.97);
+            background: rgba(212, 175, 55, 0.05);
+        }
+        
+        .service-icon {
+            font-size: 30px;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+        }
+        
+        .service-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-light);
+            line-height: 1.3;
+        }
+        
+        /* PROJECT GALLERY - PORTRAIT SLIDESHOW */
+        .gallery-section {
+            padding: 0 15px;
+            margin-bottom: 35px;
+        }
+        
+        .gallery-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-gold);
+        }
+        
+        .gallery-title-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .gallery-icon {
+            color: var(--accent-gold);
+            font-size: 20px;
+        }
+        
+        .gallery-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+        
+        .slideshow-controls {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .slideshow-btn {
+            background: var(--tap-card-bg);
+            border: 1px solid var(--tap-card-border);
+            color: var(--accent-gold);
             width: 36px;
             height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            z-index: 3;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-        }
-        
-        .reel-badge {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: linear-gradient(135deg, #000000, #25F4EE, #FE2C55);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            z-index: 3;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        
-        .reel-play-icon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            opacity: 0.9;
-            transition: all 0.3s ease;
-            z-index: 2;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-        }
-        
-        .reel-item:hover .reel-play-icon {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1.1);
-            background: rgba(0, 0, 0, 0.9);
-        }
-        
-        .reel-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            padding: 10px;
-            color: white;
-            font-size: 11px;
-            z-index: 2;
-        }
-        
-        /* Projects Gallery - BINAGO: PORTRAIT na may natural ratio */
-        .gallery-section {
-            padding: 0 20px;
-            margin-bottom: 30px;
-        }
-        
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-top: 15px;
-        }
-        
-        .gallery-item {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
+            font-size: 13px;
             cursor: pointer;
-            background: var(--dark-black);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s ease;
-            height: auto;
-            min-height: 200px;
-            display: flex;
-            flex-direction: column;
+            transition: all 0.2s ease;
+            touch-action: manipulation;
         }
         
-        /* NATURAL RATIO: Hindi na fixed height, natural ratio ng image */
-        .gallery-image-container {
+        .slideshow-btn:active {
+            transform: scale(0.95);
+            background: var(--accent-gold);
+            color: var(--primary-black);
+        }
+        
+        /* PORTRAIT SLIDESHOW CONTAINER */
+        .slideshow-container {
             position: relative;
             width: 100%;
-            height: 0;
-            padding-bottom: 133.33%; /* 3:4 ratio para sa portrait (4/3 = 1.3333) */
+            height: 500px; /* Portrait height */
+            border-radius: 15px;
             overflow: hidden;
+            background: var(--dark-black);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
         
-        .gallery-image {
+        .slideshow-slide {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .slideshow-slide.active {
+            opacity: 1;
+        }
+        
+        .slide-image-container {
+            flex: 1;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--dark-black);
+        }
+        
+        .slide-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Changed from cover to contain for portrait */
+            max-height: 100%;
             transition: transform 0.5s ease;
         }
         
-        .gallery-item:hover .gallery-image {
-            transform: scale(1.05);
+        .slideshow-slide.active .slide-image {
+            transform: scale(1.01);
         }
         
-        .gallery-overlay {
+        .slide-caption {
             background: var(--dark-black);
-            padding: 10px 12px;
-            color: white;
-            font-size: 11px;
+            padding: 12px 15px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .gallery-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-gold);
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
+        .slide-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 4px;
         }
         
-        /* Company Info */
-        .info-section {
-            padding: 0 20px;
+        .slide-desc {
+            font-size: 11px;
+            color: var(--text-gray);
+        }
+        
+        /* Slideshow Dots */
+        .slideshow-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .slideshow-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--tap-card-bg);
+            border: 1px solid var(--tap-card-border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            touch-action: manipulation;
+        }
+        
+        .slideshow-dot.active {
+            background: var(--accent-gold);
+            border-color: var(--accent-gold);
+            transform: scale(1.2);
+        }
+        
+        .slideshow-dot:active {
+            transform: scale(1.1);
+        }
+        
+        /* Slideshow Progress Bar */
+        .slideshow-progress {
+            width: 100%;
+            height: 3px;
+            background: var(--tap-card-bg);
+            margin-top: 12px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .slideshow-progress-bar {
+            height: 100%;
+            background: var(--accent-gold);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        
+        /* TikTok Video Links - Mobile First */
+        .tiktok-video-section {
+            padding: 0 15px;
+            margin-bottom: 30px;
         }
         
         .section-header {
@@ -550,52 +631,181 @@
             color: var(--text-light);
         }
         
+        .reels-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .reel-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--dark-black);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            height: 200px; /* Adjusted for mobile */
+            display: block;
+            text-decoration: none;
+            touch-action: manipulation;
+        }
+        
+        .reel-item:active {
+            transform: scale(0.98);
+            border-color: var(--accent-gold);
+        }
+        
+        .reel-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .tt-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #000000, #25F4EE, #FE2C55);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            z-index: 3;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+        }
+        
+        .reel-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: linear-gradient(135deg, #000000, #25F4EE, #FE2C55);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 10px;
+            font-weight: 600;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .reel-play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+        
+        .reel-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 8px;
+            color: white;
+            font-size: 10px;
+            z-index: 2;
+        }
+        
+        /* Company Info - Mobile First */
+        .info-section {
+            padding: 0 15px;
+        }
+        
         .info-item {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 15px;
-            padding: 15px;
+            margin-bottom: 12px;
+            padding: 12px;
             background: var(--info-item-bg);
             border-radius: 10px;
             border-left: 3px solid var(--accent-gold);
             transition: all 0.3s ease;
         }
         
-        .info-item:hover {
+        .info-item:active {
+            transform: translateX(3px);
             background: rgba(212, 175, 55, 0.05);
-            transform: translateX(5px);
         }
         
         .info-icon {
             color: var(--accent-gold);
-            font-size: 18px;
-            margin-right: 15px;
-            min-width: 24px;
+            font-size: 16px;
+            margin-right: 12px;
+            min-width: 20px;
         }
         
-        /* Modern Footer */
+        .info-item div {
+            flex: 1;
+        }
+        
+        .info-item strong {
+            font-size: 14px;
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-light);
+        }
+        
+        .info-item p {
+            font-size: 12px;
+            color: var(--text-gray);
+            margin-bottom: 0;
+            line-height: 1.5;
+        }
+        
+        .info-item a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        /* Modern Footer - Mobile First */
         .modern-footer {
             background: var(--footer-bg);
-            padding: 40px 0 20px;
+            padding: 30px 0 15px;
             border-top: 2px solid var(--accent-gold);
             transition: all 0.3s ease;
         }
         
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin-bottom: 25px;
+            padding: 0 15px;
         }
         
         .footer-brand {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
         }
         
         .footer-logo {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
             color: var(--text-light);
         }
@@ -605,20 +815,20 @@
         }
         
         .footer-desc {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-gray);
             line-height: 1.6;
         }
         
         .social-grid {
             display: flex;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 8px;
+            margin-top: 10px;
         }
         
         .social-icon {
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
             background: var(--social-icon-bg);
             border-radius: 10px;
             display: flex;
@@ -627,18 +837,19 @@
             color: var(--text-light);
             text-decoration: none;
             transition: all 0.3s ease;
+            touch-action: manipulation;
         }
         
-        .social-icon:hover {
+        .social-icon:active {
+            transform: scale(0.95);
             background: var(--accent-gold);
             color: var(--primary-black);
-            transform: translateY(-3px);
         }
         
         .footer-links h5 {
             color: var(--accent-gold);
-            margin-bottom: 20px;
-            font-size: 16px;
+            margin-bottom: 15px;
+            font-size: 15px;
         }
         
         .footer-links ul {
@@ -647,30 +858,33 @@
         }
         
         .footer-links li {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         
         .footer-links a {
             color: var(--text-gray);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13px;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            padding: 5px 0;
         }
         
-        .footer-links a:hover {
+        .footer-links a:active {
             color: var(--accent-gold);
-            transform: translateX(5px);
+            transform: translateX(3px);
         }
         
         .copyright {
             text-align: center;
-            padding-top: 20px;
+            padding-top: 15px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-gray);
+            padding-left: 15px;
+            padding-right: 15px;
         }
         
         .light-mode .copyright {
@@ -681,19 +895,23 @@
         .toast-container {
             position: fixed;
             bottom: 20px;
-            right: 20px;
+            left: 15px;
+            right: 15px;
             z-index: 1001;
+            display: flex;
+            justify-content: center;
         }
         
         .toast {
             background: var(--card-bg);
             border-left: 4px solid var(--accent-gold);
             color: var(--text-light);
-            padding: 15px 20px;
+            padding: 12px 16px;
             border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
             display: none;
-            max-width: 300px;
+            max-width: 400px;
+            width: 100%;
             backdrop-filter: blur(10px);
             border: 1px solid var(--tap-card-border);
         }
@@ -704,119 +922,213 @@
         }
         
         @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
         
-        /* Responsive */
-        @media (max-width: 768px) {
-            .tap-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-            
-            .reels-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-            
-            .gallery-image-container {
-                padding-bottom: 133.33%; /* 3:4 ratio pa rin sa mobile */
-            }
-            
-            .profile-name {
-                font-size: 26px;
-            }
-            
-            .profile-img {
-                width: 130px;
-                height: 130px;
+        /* Responsive Tablet */
+        @media (min-width: 768px) {
+            html {
+                font-size: 17px;
             }
             
             .theme-toggle {
-                top: 15px;
-                right: 15px;
+                top: 20px;
+                right: 20px;
             }
             
-            .theme-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 16px;
-            }
-            
-            .profile-title {
-                font-size: 16px;
-            }
-            
-            .profile-company {
-                font-size: 18px;
-            }
-            
-            .reel-item {
-                height: 320px;
-                aspect-ratio: 9/16;
+            .modern-header {
+                padding: 15px 0;
             }
             
             .logo-container {
-                width: 50px;
-                height: 50px;
+                width: 60px;
+                height: 60px;
             }
             
             .logo-main {
-                font-size: 18px;
+                font-size: 22px;
             }
             
             .logo-sub {
-                font-size: 9px;
+                font-size: 10px;
             }
-        }
-        
-        @media (max-width: 576px) {
+            
+            .main-content {
+                padding: 30px 0 50px;
+            }
+            
+            .container {
+                max-width: 720px;
+                margin: 0 auto;
+            }
+            
+            .profile-header {
+                padding: 40px 20px;
+            }
+            
+            .profile-img {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .profile-name {
+                font-size: 30px;
+            }
+            
+            .tap-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 15px;
+                padding: 0 20px;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+            }
+            
+            .service-card {
+                min-height: 140px;
+                padding: 25px 15px;
+            }
+            
+            .service-icon {
+                font-size: 34px;
+            }
+            
+            .service-name {
+                font-size: 13px;
+            }
+            
+            .slideshow-container {
+                height: 550px;
+            }
+            
             .reels-grid {
-                grid-template-columns: 1fr;
-                max-width: 300px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            
-            .gallery-grid {
-                grid-template-columns: 1fr;
-                max-width: 300px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            
-            .reel-item {
-                height: 380px;
-            }
-            
-            .logo-brand {
+                grid-template-columns: repeat(3, 1fr);
                 gap: 10px;
             }
             
-            .logo-container {
-                width: 45px;
-                height: 45px;
+            .reel-item {
+                height: 220px;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
             }
         }
         
-        @media (max-width: 480px) {
-            .reels-grid {
-                grid-template-columns: 1fr;
-                max-width: 280px;
+        /* Responsive Desktop */
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
             }
             
-            .gallery-grid {
-                grid-template-columns: 1fr;
-                max-width: 280px;
+            .slideshow-container {
+                height: 600px;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .service-card:hover {
+                transform: translateY(-5px);
+                background: rgba(212, 175, 55, 0.05);
+            }
+            
+            .tap-card:hover {
+                transform: translateY(-3px);
+                background: rgba(212, 175, 55, 0.1);
+            }
+            
+            .social-icon:hover {
+                transform: translateY(-3px);
+                background: var(--accent-gold);
+                color: var(--primary-black);
+            }
+            
+            .footer-links a:hover {
+                color: var(--accent-gold);
+                transform: translateX(5px);
+            }
+            
+            .info-item:hover {
+                transform: translateX(5px);
+                background: rgba(212, 175, 55, 0.05);
+            }
+            
+            .reel-item:hover {
+                transform: translateY(-5px);
+                border-color: var(--accent-gold);
+            }
+            
+            .slideshow-btn:hover {
+                transform: scale(1.1);
+                background: var(--accent-gold);
+                color: var(--primary-black);
+            }
+        }
+        
+        /* Extra Small Phones */
+        @media (max-width: 360px) {
+            .profile-name {
+                font-size: 24px;
+            }
+            
+            .profile-img {
+                width: 110px;
+                height: 110px;
+            }
+            
+            .slideshow-container {
+                height: 450px;
+            }
+            
+            .reels-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
             
             .reel-item {
-                height: 380px;
+                height: 180px;
+            }
+            
+            .services-grid {
+                gap: 10px;
+            }
+            
+            .service-card {
+                padding: 18px 8px;
+                min-height: 120px;
+            }
+            
+            .service-icon {
+                font-size: 28px;
+            }
+            
+            .service-name {
+                font-size: 11px;
+            }
+        }
+        
+        /* Landscape Mode */
+        @media (orientation: landscape) and (max-height: 600px) {
+            .slideshow-container {
+                height: 350px;
+            }
+            
+            .profile-img {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .profile-name {
+                font-size: 22px;
+            }
+            
+            .main-content {
+                padding: 15px 0 30px;
             }
         }
     </style>
@@ -854,1336 +1166,332 @@
     <!-- Main Content -->
     <main class="main-content">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-7 col-md-9">
-                    <!-- Profile Card -->
-                    <div class="profile-card">
-                        <div class="profile-header">
-                            <div class="profile-badge">SALES EXECUTIVE</div>
-                            <div class="profile-img-container">
-                                <img src="img/IMG_1067.jpeg" class="profile-img" alt="Cus Marqueses" 
-                                     onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\">
-                                <div class="profile-verify">
-                                    <i class="fas fa-check"></i>
-                                </div>
+            <!-- Profile Card -->
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-badge">SALES EXECUTIVE</div>
+                    <div class="profile-img-container">
+                        <img src="img/IMG_1067.jpeg" class="profile-img" alt="Rose Anthonette Amparo" 
+                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"%23121212\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"12\" text-anchor=\"middle\" fill=\"white\">Profile Image</text></svg>';">
+                        <div class="profile-verify">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </div>
+                    <h2 class="profile-name">Rose Anthonette Amparo</h2>
+                    <div class="profile-title">Sales Executive</div>
+                    <div class="profile-company">Woodteqph Prime Corporation</div>
+                    
+                    <div class="profile-intro">
+                        <p>Specializing in premium construction solutions, custom cabinetry, and luxury interior design. Dedicated to delivering excellence in every project.</p>
+                    </div>
+                </div>
+                
+                <!-- Tap Action Grid -->
+                <div class="tap-grid">
+                    <!-- Call Button -->
+                    <a href="tel:+639485387691" class="tap-card">
+                        <div class="tap-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="tap-label">CALL NOW</div>
+                        <div class="tap-desc">Direct dial to office</div>
+                    </a>
+                    
+                    <!-- Email Button -->
+                    <a href="mailto:sales1.woodteqph@gmail.com" class="tap-card">
+                        <div class="tap-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="tap-label">SEND EMAIL</div>
+                        <div class="tap-desc">Quick contact form</div>
+                    </a>
+                    
+                    <!-- Save Contact -->
+                    <div class="tap-card" id="saveContactBtn">
+                        <div class="tap-icon">
+                            <i class="fas fa-save"></i>
+                        </div>
+                        <div class="tap-label">SAVE CONTACT</div>
+                        <div class="tap-desc">Add to phonebook</div>
+                    </div>
+                    
+                    <!-- Share Card -->
+                    <div class="tap-card" id="shareCardBtn">
+                        <div class="tap-icon">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <div class="tap-label">SHARE CARD</div>
+                        <div class="tap-desc">Send to friends</div>
+                    </div>
+                </div>
+
+                <!-- SERVICES SECTION -->
+                <div class="services-section">
+                    <div class="services-header">
+                        <i class="fas fa-tools services-icon"></i>
+                        <h4 class="services-title">Our Premium Services</h4>
+                    </div>
+                    
+                    <div class="services-grid">
+                        <!-- Custom Kitchen & Cabinet -->
+                        <div class="service-card" data-service="kitchen">
+                            <div class="service-icon">
+                                <i class="fas fa-utensils"></i>
                             </div>
-                            <h2 class="profile-name">Rose Anthonette Amparo</h2>
-                            <div class="profile-title">Sales Executive</div>
-                            <div class="profile-company">Woodteqph Prime Corporation</div>
-                            
-                            <div class="profile-intro">
-                                <p>Specializing in premium construction solutions, custom cabinetry, and luxury interior design. Dedicated to delivering excellence in every project.</p>
+                            <div class="service-name">Custom Kitchen & Cabinet</div>
+                        </div>
+                        
+                        <!-- Glass Railing -->
+                        <div class="service-card" data-service="railing">
+                            <div class="service-icon">
+                                <i class="fas fa-glass-whiskey"></i>
+                            </div>
+                            <div class="service-name">Glass Railing</div>
+                        </div>
+                        
+                        <!-- Shower Enclosure -->
+                        <div class="service-card" data-service="shower">
+                            <div class="service-icon">
+                                <i class="fas fa-shower"></i>
+                            </div>
+                            <div class="service-name">Shower Enclosure</div>
+                        </div>
+                        
+                        <!-- Composite Panel -->
+                        <div class="service-card" data-service="composite">
+                            <div class="service-icon">
+                                <i class="fas fa-th-large"></i>
+                            </div>
+                            <div class="service-name">Composite Panel</div>
+                        </div>
+                        
+                        <!-- Aluminum Doors & Windows -->
+                        <div class="service-card" data-service="aluminum">
+                            <div class="service-icon">
+                                <i class="fas fa-door-open"></i>
+                            </div>
+                            <div class="service-name">Aluminum Doors & Windows</div>
+                        </div>
+                        
+                        <!-- Walkin Closet & Wardrobe -->
+                        <div class="service-card" data-service="closet">
+                            <div class="service-icon">
+                                <i class="fas fa-tshirt"></i>
+                            </div>
+                            <div class="service-name">Walkin Closet & Wardrobe</div>
+                        </div>
+                        
+                        <!-- Modular Cabinets -->
+                        <div class="service-card" data-service="modular">
+                            <div class="service-icon">
+                                <i class="fas fa-cube"></i>
+                            </div>
+                            <div class="service-name">Modular Cabinets</div>
+                        </div>
+                        
+                        <!-- Vanity -->
+                        <div class="service-card" data-service="vanity">
+                            <div class="service-icon">
+                                <i class="fas fa-bath"></i>
+                            </div>
+                            <div class="service-name">Vanity</div>
+                        </div>
+                        
+                        <!-- Wood Floor Planks -->
+                        <div class="service-card" data-service="floor">
+                            <div class="service-icon">
+                                <i class="fas fa-border-style"></i>
+                            </div>
+                            <div class="service-name">Wood Floor Planks</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJECT GALLERY SLIDESHOW - PORTRAIT -->
+                <div class="gallery-section">
+                    <div class="gallery-header">
+                        <div class="gallery-title-container">
+                            <i class="fas fa-images gallery-icon"></i>
+                            <h4 class="gallery-title">Project Gallery</h4>
+                        </div>
+                        
+                        <div class="slideshow-controls">
+                            <button class="slideshow-btn" id="prevSlide">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="slideshow-btn" id="playPauseSlide">
+                                <i class="fas fa-pause"></i>
+                            </button>
+                            <button class="slideshow-btn" id="nextSlide">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Slideshow Container -->
+                    <div class="slideshow-container" id="slideshowContainer">
+                        <!-- Slide 1 -->
+                        <div class="slideshow-slide active">
+                            <div class="slide-image-container">
+                                <img src="img/1.png" class="slide-image" alt="Luxury Villa Interior"
+                                     onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 300 400\"><rect width=\"300\" height=\"400\" fill=\"%23121212\"/><text x=\"150\" y=\"200\" font-family=\"Arial\" font-size=\"16\" text-anchor=\"middle\" fill=\"white\">Luxury Villa Interior</text></svg>'">
+                            </div>
+                            <div class="slide-caption">
+                                <div class="slide-title">Luxury Villa Interior</div>
+                                <div class="slide-desc">Custom kitchen cabinets and premium wood flooring</div>
                             </div>
                         </div>
                         
-                        <!-- Tap Action Grid -->
-                        <div class="tap-grid">
-                            <!-- Call Button -->
-                            <a href="tel:+639485387691" class="tap-card">
-                                <div class="tap-icon">
-                                    <i class="fas fa-phone-alt"></i>
-                                </div>
-                                <div class="tap-label">CALL NOW</div>
-                                <div class="tap-desc">Direct dial to office</div>
-                            </a>
-                            
-                            <!-- Email Button -->
-                            <a href="mailto:sales1.woodteqph@gmail.com" class="tap-card">
-                                <div class="tap-icon">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div class="tap-label">SEND EMAIL</div>
-                                <div class="tap-desc">Quick contact form</div>
-                            </a>
-                            
-                            <!-- Save Contact -->
-                            <div class="tap-card" id="saveContactBtn">
-                                <div class="tap-icon">
-                                    <i class="fas fa-save"></i>
-                                </div>
-                                <div class="tap-label">SAVE CONTACT</div>
-                                <div class="tap-desc">Add to phonebook</div>
+                        <!-- Slide 2 -->
+                        <div class="slideshow-slide">
+                            <div class="slide-image-container">
+                                <img src="img/2.png" class="slide-image" alt="Corporate Office"
+                                     onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 300 400\"><rect width=\"300\" height=\"400\" fill=\"%23121212\"/><text x=\"150\" y=\"200\" font-family=\"Arial\" font-size=\"16\" text-anchor=\"middle\" fill=\"white\">Corporate Office</text></svg>'">
                             </div>
-                            
-                            <!-- Share Card -->
-                            <div class="tap-card" id="shareCardBtn">
-                                <div class="tap-icon">
-                                    <i class="fas fa-share-alt"></i>
-                                </div>
-                                <div class="tap-label">SHARE CARD</div>
-                                <div class="tap-desc">Send to friends</div>
+                            <div class="slide-caption">
+                                <div class="slide-title">Corporate Office</div>
+                                <div class="slide-desc">Modern glass partitions and aluminum windows</div>
                             </div>
                         </div>
-
-                        <!-- TikTok Video Links -->
-                        <div class="tiktok-video-section">
-                            <div class="section-header">
-                                <i class="fab fa-tiktok section-icon"></i>
-                                <h4 class="section-title">Project Reels on TikTok</h4>
-                            </div>
-
-                            <div class="reels-grid">
-                                <!-- Reel 1 -->
-                                <a href="https://www.tiktok.com/@woodteqphprime/video/7602092247701605639" 
-                                   target="_blank" class="reel-item">
-                                    <div class="tt-icon">
-                                        <i class="fab fa-tiktok"></i>
-                                    </div>
-                                    <img src="img/yes.png" class="reel-thumbnail" alt="Warehouse Project"
-                                         onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"%23121212\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"12\" text-anchor=\"middle\" fill=\"white\">Warehouse Project</text></svg>'">
-                                    <div class="reel-play-icon">
-                                        <i class="fas fa-play"></i>
-                                    </div>
-                                    <div class="reel-overlay">Warehouse Project</div>
-                                    <div class="reel-badge">
-                                        <i class="fab fa-tiktok"></i> TikTok
-                                    </div>
-                                </a>
-
-                                <!-- Reel 2 -->
-                                <a href="https://www.tiktok.com/@woodteqphprime/video/7554563283148213522" 
-                                   target="_blank" class="reel-item">
-                                    <div class="tt-icon">
-                                        <i class="fab fa-tiktok"></i>
-                                    </div>
-                                    <img src="img/no.png" class="reel-thumbnail" alt="Panglao Projects"
-                                         onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"%23121212\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"12\" text-anchor=\"middle\" fill=\"white\">Panglao Projects</text></svg>'">
-                                    <div class="reel-play-icon">
-                                        <i class="fas fa-play"></i>
-                                    </div>
-                                    <div class="reel-overlay">Panglao Projects</div>
-                                    <div class="reel-badge">
-                                        <i class="fab fa-tiktok"></i> TikTok
-                                    </div>
-                                </a>
-
-                                <!-- Reel 3 -->
-                                <a href="https://www.tiktok.com/@woodteqphprime/video/7602090908066057479" 
-                                   target="_blank" class="reel-item">
-                                    <div class="tt-icon">
-                                        <i class="fab fa-tiktok"></i>
-                                    </div>
-                                    <img src="img/he.png" class="reel-thumbnail" alt="Studio N Projects"
-                                         onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"%23121212\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"12\" text-anchor=\"middle\" fill=\"white\">Studio N Projects</text></svg>'">
-                                    <div class="reel-play-icon">
-                                        <i class="fas fa-play"></i>
-                                    </div>
-                                    <div class="reel-overlay">Studio N Projects</div>
-                                    <div class="reel-badge">
-                                        <i class="fab fa-tiktok"></i> TikTok
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Project Gallery</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-        }
-        
-        body {
-            background: #ffffff;
-            color: #333333;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        /* Gallery Header - GOLD AND WHITE */
-        .gallery-section {
-            background: #ffffff;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 40px;
-            border: 1px solid #e0e0e0;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-        }
-        
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #D4AF37;
-        }
-        
-        .section-icon {
-            font-size: 28px;
-            color: #D4AF37; /* GOLD COLOR */
-            margin-right: 15px;
-        }
-        
-        .section-title {
-            font-size: 28px;
-            font-weight: 700;
-            color: #333333;
-            letter-spacing: 1px;
-        }
-        
-        /* Gallery Grid */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-        
-        .gallery-item {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            height: 250px;
-            background: #f8f8f8;
-            border: 1px solid #f0f0f0;
-        }
-        
-        .gallery-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-            border-color: #D4AF37;
-        }
-        
-        .gallery-image-container {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-        
-        .gallery-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s ease;
-        }
-        
-        .gallery-item:hover .gallery-image {
-            transform: scale(1.05);
-        }
-        
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-            color: white;
-            padding: 20px;
-            font-weight: 600;
-            font-size: 18px;
-            text-align: center;
-            backdrop-filter: blur(2px);
-        }
-        
-        /* Slideshow Modal - GOLD AND WHITE */
-        .slideshow-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.98);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .slideshow-content {
-            width: 90%;
-            max-width: 1000px;
-            height: 80vh;
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-            background: #ffffff;
-            border: 1px solid #e0e0e0;
-        }
-        
-        .slideshow-image-container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #f9f9f9;
-        }
-        
-        .slideshow-image {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            border-radius: 8px;
-            animation: zoomIn 0.5s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        @keyframes zoomIn {
-            from { transform: scale(0.95); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-        
-        .slideshow-controls {
-            position: absolute;
-            bottom: 30px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            z-index: 1002;
-        }
-        
-        .control-btn {
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid #D4AF37;
-            color: #D4AF37;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .control-btn:hover {
-            background: #D4AF37;
-            color: white;
-            transform: scale(1.1);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
-        }
-        
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid #D4AF37;
-            color: #D4AF37;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 22px;
-            z-index: 1002;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .close-btn:hover {
-            background: #D4AF37;
-            color: white;
-            transform: rotate(90deg);
-        }
-        
-        .image-title {
-            position: absolute;
-            bottom: 120px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-size: 28px;
-            font-weight: 700;
-            color: #333333;
-            padding: 15px 20px;
-            z-index: 1001;
-            background: rgba(255, 255, 255, 0.9);
-            margin: 0 50px;
-            border-radius: 10px;
-            border: 1px solid #e0e0e0;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        /* Wheel Animation Toggle */
-        .wheel-toggle {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .toggle-btn {
-            background: #D4AF37;
-            border: none;
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
-        }
-        
-        .toggle-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.4);
-            background: #c19b2e;
-        }
-        
-        .toggle-btn.active {
-            background: #333333;
-        }
-        
-        /* Wheel Animation */
-        .wheel-animation {
-            display: none;
-            justify-content: center;
-            align-items: center;
-            height: 300px;
-            margin: 40px 0;
-            position: relative;
-        }
-        
-        .wheel-container {
-            width: 300px;
-            height: 300px;
-            position: relative;
-            transform-style: preserve-3d;
-            animation: rotateWheel 30s linear infinite;
-            animation-play-state: paused;
-        }
-        
-        @keyframes rotateWheel {
-            0% { transform: rotateY(0deg); }
-            100% { transform: rotateY(360deg); }
-        }
-        
-        .wheel-item {
-            position: absolute;
-            width: 200px;
-            height: 150px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            transform-origin: center center -200px;
-            border: 2px solid white;
-        }
-        
-        .wheel-item:nth-child(1) { transform: rotateY(0deg) translateZ(200px); }
-        .wheel-item:nth-child(2) { transform: rotateY(45deg) translateZ(200px); }
-        .wheel-item:nth-child(3) { transform: rotateY(90deg) translateZ(200px); }
-        .wheel-item:nth-child(4) { transform: rotateY(135deg) translateZ(200px); }
-        .wheel-item:nth-child(5) { transform: rotateY(180deg) translateZ(200px); }
-        .wheel-item:nth-child(6) { transform: rotateY(225deg) translateZ(200px); }
-        .wheel-item:nth-child(7) { transform: rotateY(270deg) translateZ(200px); }
-        .wheel-item:nth-child(8) { transform: rotateY(315deg) translateZ(200px); }
-        
-        .wheel-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .wheel-center {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            background: #D4AF37;
-            border-radius: 50%;
-            z-index: 10;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
-        }
-        
-        /* Image Counter */
-        .image-counter {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            color: #333333;
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 16px;
-            z-index: 1001;
-            border: 1px solid #e0e0e0;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            }
-            
-            .gallery-item {
-                height: 200px;
-            }
-            
-            .slideshow-content {
-                width: 95%;
-                height: 70vh;
-            }
-            
-            .control-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
-            }
-            
-            .wheel-container {
-                width: 250px;
-                height: 250px;
-            }
-            
-            .wheel-item {
-                width: 160px;
-                height: 120px;
-                transform-origin: center center -160px;
-            }
-            
-            .image-title {
-                font-size: 22px;
-                bottom: 140px;
-                margin: 0 20px;
-                padding: 12px 15px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .section-title {
-                font-size: 24px;
-            }
-            
-            .slideshow-content {
-                height: 60vh;
-            }
-            
-            .image-title {
-                font-size: 18px;
-                bottom: 160px;
-            }
-            
-            .wheel-container {
-                width: 200px;
-                height: 200px;
-            }
-            
-            .wheel-item {
-                width: 120px;
-                height: 90px;
-                transform-origin: center center -120px;
-            }
-        }
-    </style>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Project Gallery</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-        }
-        
-        body {
-            background: #ffffff;
-            color: #333333;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        /* Gallery Header - GOLD AND WHITE */
-        .gallery-section {
-            background: #ffffff;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 40px;
-            border: 1px solid #e0e0e0;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-        }
-        
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #D4AF37;
-        }
-        
-        .section-icon {
-            font-size: 28px;
-            color: #D4AF37; /* GOLD COLOR */
-            margin-right: 15px;
-        }
-        
-        .section-title {
-            font-size: 28px;
-            font-weight: 700;
-            color: #333333;
-            letter-spacing: 1px;
-        }
-        
-        /* Gallery Grid */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-        
-        .gallery-item {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            height: 250px;
-            background: #f8f8f8;
-            border: 1px solid #f0f0f0;
-        }
-        
-        .gallery-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-            border-color: #D4AF37;
-        }
-        
-        .gallery-image-container {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-        
-        .gallery-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s ease;
-        }
-        
-        .gallery-item:hover .gallery-image {
-            transform: scale(1.05);
-        }
-        
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-            color: white;
-            padding: 20px;
-            font-weight: 600;
-            font-size: 18px;
-            text-align: center;
-            backdrop-filter: blur(2px);
-        }
-        
-        /* Slideshow Modal - GOLD AND WHITE */
-        .slideshow-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.98);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .slideshow-content {
-            width: 90%;
-            max-width: 1000px;
-            height: 80vh;
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-            background: #ffffff;
-            border: 1px solid #e0e0e0;
-        }
-        
-        .slideshow-image-container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #f9f9f9;
-        }
-        
-        .slideshow-image {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            border-radius: 8px;
-            animation: zoomIn 0.5s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        @keyframes zoomIn {
-            from { transform: scale(0.95); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-        
-        .slideshow-controls {
-            position: absolute;
-            bottom: 30px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            z-index: 1002;
-        }
-        
-        .control-btn {
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid #D4AF37;
-            color: #D4AF37;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .control-btn:hover {
-            background: #D4AF37;
-            color: white;
-            transform: scale(1.1);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
-        }
-        
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid #D4AF37;
-            color: #D4AF37;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 22px;
-            z-index: 1002;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .close-btn:hover {
-            background: #D4AF37;
-            color: white;
-            transform: rotate(90deg);
-        }
-        
-        .image-title {
-            position: absolute;
-            bottom: 120px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-size: 28px;
-            font-weight: 700;
-            color: #333333;
-            padding: 15px 20px;
-            z-index: 1001;
-            background: rgba(255, 255, 255, 0.9);
-            margin: 0 50px;
-            border-radius: 10px;
-            border: 1px solid #e0e0e0;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        /* Wheel Animation Toggle */
-        .wheel-toggle {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .toggle-btn {
-            background: #D4AF37;
-            border: none;
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
-        }
-        
-        .toggle-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.4);
-            background: #c19b2e;
-        }
-        
-        .toggle-btn.active {
-            background: #333333;
-        }
-        
-        /* Wheel Animation */
-        .wheel-animation {
-            display: none;
-            justify-content: center;
-            align-items: center;
-            height: 300px;
-            margin: 40px 0;
-            position: relative;
-        }
-        
-        .wheel-container {
-            width: 300px;
-            height: 300px;
-            position: relative;
-            transform-style: preserve-3d;
-            animation: rotateWheel 30s linear infinite;
-            animation-play-state: paused;
-        }
-        
-        @keyframes rotateWheel {
-            0% { transform: rotateY(0deg); }
-            100% { transform: rotateY(360deg); }
-        }
-        
-        .wheel-item {
-            position: absolute;
-            width: 200px;
-            height: 150px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            transform-origin: center center -200px;
-            border: 2px solid white;
-        }
-        
-        .wheel-item:nth-child(1) { transform: rotateY(0deg) translateZ(200px); }
-        .wheel-item:nth-child(2) { transform: rotateY(45deg) translateZ(200px); }
-        .wheel-item:nth-child(3) { transform: rotateY(90deg) translateZ(200px); }
-        .wheel-item:nth-child(4) { transform: rotateY(135deg) translateZ(200px); }
-        .wheel-item:nth-child(5) { transform: rotateY(180deg) translateZ(200px); }
-        .wheel-item:nth-child(6) { transform: rotateY(225deg) translateZ(200px); }
-        .wheel-item:nth-child(7) { transform: rotateY(270deg) translateZ(200px); }
-        .wheel-item:nth-child(8) { transform: rotateY(315deg) translateZ(200px); }
-        
-        .wheel-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .wheel-center {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            background: #D4AF37;
-            border-radius: 50%;
-            z-index: 10;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
-        }
-        
-        /* Image Counter */
-        .image-counter {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            color: #333333;
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 16px;
-            z-index: 1001;
-            border: 1px solid #e0e0e0;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            }
-            
-            .gallery-item {
-                height: 200px;
-            }
-            
-            .slideshow-content {
-                width: 95%;
-                height: 70vh;
-            }
-            
-            .control-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
-            }
-            
-            .wheel-container {
-                width: 250px;
-                height: 250px;
-            }
-            
-            .wheel-item {
-                width: 160px;
-                height: 120px;
-                transform-origin: center center -160px;
-            }
-            
-            .image-title {
-                font-size: 22px;
-                bottom: 140px;
-                margin: 0 20px;
-                padding: 12px 15px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .section-title {
-                font-size: 24px;
-            }
-            
-            .slideshow-content {
-                height: 60vh;
-            }
-            
-            .image-title {
-                font-size: 18px;
-                bottom: 160px;
-            }
-            
-            .wheel-container {
-                width: 200px;
-                height: 200px;
-            }
-            
-            .wheel-item {
-                width: 120px;
-                height: 90px;
-                transform-origin: center center -120px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <!-- Projects Gallery -->
-        <div class="gallery-section">
-            <div class="section-header">
-                <i class="fas fa-images section-icon"></i>
-                <h4 class="section-title">Project Gallery</h4>
-            </div>
-            
-            <!-- Wheel Animation Toggle -->
-            <div class="wheel-toggle">
-                <button class="toggle-btn" id="toggleWheel">
-                    <i class="fas fa-sync-alt"></i>
-                    <span>Start 3D Wheel Animation</span>
-                </button>
-            </div>
-            
-            <!-- Wheel Animation -->
-            <div class="wheel-animation" id="wheelAnimation">
-                <div class="wheel-container" id="wheelContainer">
-                    <!-- Wheel items will be generated by JavaScript -->
-                </div>
-                <div class="wheel-center"></div>
-            </div>
-            
-            <!-- Gallery Grid -->
-            <div class="gallery-grid">
-                <!-- Project 1 -->
-                <div class="gallery-item" data-index="0">
-                    <div class="gallery-image-container">
-                        <img src="img/1.png" class="gallery-image" alt="Luxury Villa Interior">
-                    </div>
-                    <div class="gallery-overlay">
-                        Luxury Villa Interior
-                    </div>
-                </div>
-                
-                <!-- Project 2 -->
-                <div class="gallery-item" data-index="1">
-                    <div class="gallery-image-container">
-                        <img src="img/2.png" class="gallery-image" alt="Corporate Office">
-                    </div>
-                    <div class="gallery-overlay">
-                        Corporate Office
-                    </div>
-                </div>
-                
-                <!-- Project 3 -->
-                <div class="gallery-item" data-index="2">
-                    <div class="gallery-image-container">
-                        <img src="img/3.png" class="gallery-image" alt="Modern Kitchen">
-                    </div>
-                    <div class="gallery-overlay">
-                        Modern Kitchen
-                    </div>
-                </div>
-                
-                <!-- Project 4 -->
-                <div class="gallery-item" data-index="3">
-                    <div class="gallery-image-container">
-                        <img src="img/4.png" class="gallery-image" alt="Retail Showroom">
-                    </div>
-                    <div class="gallery-overlay">
-                        Retail Showroom
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Slideshow Modal -->
-        <div class="slideshow-modal" id="slideshowModal">
-            <div class="slideshow-content">
-                <div class="image-counter" id="imageCounter">1 / 4</div>
-                <div class="slideshow-image-container">
-                    <img class="slideshow-image" id="slideshowImage" src="" alt="">
-                </div>
-                <div class="image-title" id="imageTitle">Luxury Villa Interior</div>
-                
-                <button class="close-btn" id="closeModal">
-                    <i class="fas fa-times"></i>
-                </button>
-                
-                <div class="slideshow-controls">
-                    <button class="control-btn" id="prevBtn">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button class="control-btn" id="playPauseBtn">
-                        <i class="fas fa-pause"></i>
-                    </button>
-                    <button class="control-btn" id="nextBtn">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Gallery data - USING YOUR LOCAL IMAGES
-        const galleryItems = [
-            {
-                src: "img/1.png",
-                title: "Luxury Villa Interior",
-                alt: "Luxury Villa Interior"
-            },
-            {
-                src: "img/2.png",
-                title: "Corporate Office",
-                alt: "Corporate Office"
-            },
-            {
-                src: "img/3.png",
-                title: "Modern Kitchen",
-                alt: "Modern Kitchen"
-            },
-            {
-                src: "img/4.png",
-                title: "Retail Showroom",
-                alt: "Retail Showroom"
-            }
-        ];
-
-        // DOM Elements
-        const galleryGrid = document.querySelector('.gallery-grid');
-        const slideshowModal = document.getElementById('slideshowModal');
-        const slideshowImage = document.getElementById('slideshowImage');
-        const imageTitle = document.getElementById('imageTitle');
-        const imageCounter = document.getElementById('imageCounter');
-        const closeModalBtn = document.getElementById('closeModal');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const playPauseBtn = document.getElementById('playPauseBtn');
-        const toggleWheelBtn = document.getElementById('toggleWheel');
-        const wheelAnimation = document.getElementById('wheelAnimation');
-        const wheelContainer = document.getElementById('wheelContainer');
-
-        // State variables
-        let currentIndex = 0;
-        let slideshowInterval;
-        let isPlaying = false;
-        let isWheelActive = false;
-
-        // Initialize the gallery
-        function initGallery() {
-            // Create wheel items
-            createWheelItems();
-            
-            // Add click event to gallery items
-            document.querySelectorAll('.gallery-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    const index = parseInt(this.getAttribute('data-index'));
-                    openSlideshow(index);
-                });
-            });
-            
-            // Add event listeners for modal controls
-            closeModalBtn.addEventListener('click', closeSlideshow);
-            prevBtn.addEventListener('click', showPrevImage);
-            nextBtn.addEventListener('click', showNextImage);
-            playPauseBtn.addEventListener('click', togglePlayPause);
-            
-            // Add keyboard navigation
-            document.addEventListener('keydown', handleKeydown);
-            
-            // Wheel toggle button
-            toggleWheelBtn.addEventListener('click', toggleWheelAnimation);
-            
-            // Prevent image errors - gold/white theme
-            document.querySelectorAll('.gallery-image').forEach(img => {
-                img.addEventListener('error', function() {
-                    this.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23f8f8f8"/><rect x="50" y="50" width="300" height="200" fill="%23ffffff" stroke="%23D4AF37" stroke-width="2"/><text x="200" y="120" font-family="Arial" font-size="16" text-anchor="middle" fill="%23333333">' + this.alt + '</text><text x="200" y="150" font-family="Arial" font-size="12" text-anchor="middle" fill="%23D4AF37">Image not found</text></svg>';
-                });
-            });
-        }
-
-        // Create wheel animation items
-        function createWheelItems() {
-            wheelContainer.innerHTML = '';
-            
-            // Create 8 items for the wheel (repeating gallery items)
-            for (let i = 0; i < 8; i++) {
-                const itemIndex = i % galleryItems.length;
-                const wheelItem = document.createElement('div');
-                wheelItem.className = 'wheel-item';
-                wheelItem.innerHTML = `
-                    <img src="${galleryItems[itemIndex].src}" class="wheel-image" alt="${galleryItems[itemIndex].alt}">
-                `;
-                wheelContainer.appendChild(wheelItem);
-                
-                // Add click event to wheel items
-                wheelItem.addEventListener('click', () => {
-                    openSlideshow(itemIndex);
-                });
-            }
-        }
-
-        // Toggle wheel animation
-        function toggleWheelAnimation() {
-            isWheelActive = !isWheelActive;
-            
-            if (isWheelActive) {
-                wheelAnimation.style.display = 'flex';
-                wheelContainer.style.animationPlayState = 'running';
-                toggleWheelBtn.innerHTML = '<i class="fas fa-stop"></i><span>Stop 3D Wheel Animation</span>';
-                toggleWheelBtn.classList.add('active');
-            } else {
-                wheelContainer.style.animationPlayState = 'paused';
-                toggleWheelBtn.innerHTML = '<i class="fas fa-sync-alt"></i><span>Start 3D Wheel Animation</span>';
-                toggleWheelBtn.classList.remove('active');
-                
-                // Hide after animation completes
-                setTimeout(() => {
-                    if (!isWheelActive) {
-                        wheelAnimation.style.display = 'none';
-                    }
-                }, 500);
-            }
-        }
-
-        // Open slideshow modal
-        function openSlideshow(index) {
-            currentIndex = index;
-            updateSlideshow();
-            slideshowModal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-            
-            // Start autoplay
-            startAutoplay();
-        }
-
-        // Close slideshow modal
-        function closeSlideshow() {
-            slideshowModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            stopAutoplay();
-        }
-
-        // Update slideshow content
-        function updateSlideshow() {
-            const item = galleryItems[currentIndex];
-            slideshowImage.src = item.src;
-            imageTitle.textContent = item.title;
-            imageCounter.textContent = `${currentIndex + 1} / ${galleryItems.length}`;
-            
-            // Handle image errors in slideshow - gold/white theme
-            slideshowImage.onerror = function() {
-                this.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="%23f8f8f8"/><rect x="100" y="100" width="600" height="400" fill="%23ffffff" stroke="%23D4AF37" stroke-width="3"/><text x="400" y="320" font-family="Arial" font-size="30" text-anchor="middle" fill="%23333333">' + item.title + '</text><text x="400" y="380" font-family="Arial" font-size="20" text-anchor="middle" fill="%23D4AF37">Image not found</text></svg>';
-            };
-        }
-
-        // Show previous image
-        function showPrevImage() {
-            currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
-            updateSlideshow();
-        }
-
-        // Show next image
-        function showNextImage() {
-            currentIndex = (currentIndex + 1) % galleryItems.length;
-            updateSlideshow();
-        }
-
-        // Start autoplay
-        function startAutoplay() {
-            stopAutoplay();
-            isPlaying = true;
-            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            slideshowInterval = setInterval(showNextImage, 3000);
-        }
-
-        // Stop autoplay
-        function stopAutoplay() {
-            isPlaying = false;
-            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-            if (slideshowInterval) {
-                clearInterval(slideshowInterval);
-            }
-        }
-
-        // Toggle play/pause
-        function togglePlayPause() {
-            if (isPlaying) {
-                stopAutoplay();
-            } else {
-                startAutoplay();
-            }
-        }
-
-        // Handle keyboard navigation
-        function handleKeydown(e) {
-            if (slideshowModal.style.display === 'flex') {
-                if (e.key === 'Escape') {
-                    closeSlideshow();
-                } else if (e.key === 'ArrowLeft') {
-                    showPrevImage();
-                } else if (e.key === 'ArrowRight') {
-                    showNextImage();
-                } else if (e.key === ' ') {
-                    e.preventDefault();
-                    togglePlayPause();
-                }
-            }
-        }
-
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', initGallery);
-    </script>
-</body>
-</html>
                         
-                        <!-- Company Information -->
-                        <div class="info-section">
-                            <div class="section-header">
-                                <i class="fas fa-info-circle section-icon"></i>
-                                <h4 class="section-title">Company Details</h4>
+                        <!-- Slide 3 -->
+                        <div class="slideshow-slide">
+                            <div class="slide-image-container">
+                                <img src="img/3.png" class="slide-image" alt="Modern Kitchen"
+                                     onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 300 400\"><rect width=\"300\" height=\"400\" fill=\"%23121212\"/><text x=\"150\" y=\"200\" font-family=\"Arial\" font-size=\"16\" text-anchor=\"middle\" fill=\"white\">Modern Kitchen</text></svg>'">
                             </div>
-                            
-                            <div class="info-item">
-                                <i class="fas fa-building info-icon"></i>
-                                <div>
-                                    <strong>About Us</strong>
-                                    <p class="mb-0 small">WOODTEQPH PRIME CORPORATION emerged in response to the growing demand for special setup designs in Architectural Glass and aluminum windows. Originally established as WOODTEQ WOOD PRODUCTS MANUFACTURING in March 2022, the company has evolved to include a broader scope, incorporating specializations in modular cabinetry and countertop installation..</p>
-                                </div>
+                            <div class="slide-caption">
+                                <div class="slide-title">Modern Kitchen</div>
+                                <div class="slide-desc">Custom cabinetry with premium finishes</div>
                             </div>
-                            
-                            <div class="info-item">
-                                <i class="fas fa-map-marker-alt info-icon"></i>
-                                <div>
-                                    <strong>Location</strong>
-                                    <p class="mb-0 small">343 West Service Road, Poblete Compound, Sun Valley, Parañaque City</p>
-                                </div>
+                        </div>
+                        
+                        <!-- Slide 4 -->
+                        <div class="slideshow-slide">
+                            <div class="slide-image-container">
+                                <img src="img/4.png" class="slide-image" alt="Retail Showroom"
+                                     onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 300 400\"><rect width=\"300\" height=\"400\" fill=\"%23121212\"/><text x=\"150\" y=\"200\" font-family=\"Arial\" font-size=\"16\" text-anchor=\"middle\" fill=\"white\">Retail Showroom</text></svg>'">
                             </div>
-                            
-                            <div class="info-item">
-                                <i class="fas fa-globe info-icon"></i>
-                                <div>
-                                    <strong>Website</strong>
-                                    <p class="mb-0 small">
-                                        <a href="https://woodteqphprime.com" target="_blank" class="text-decoration-none" style="color: var(--accent-gold); font-weight: 500;">
-                                            Visit Official Site
-                                        </a>
-                                    </p>
-                                </div>
+                            <div class="slide-caption">
+                                <div class="slide-title">Retail Showroom</div>
+                                <div class="slide-desc">Custom display cabinets and lighting solutions</div>
                             </div>
-                            
-                            <div class="info-item">
-                                <i class="fas fa-clock info-icon"></i>
-                                <div>
-                                    <strong>Business Hours</strong>
-                                    <p class="mb-0 small">Monday - Sunday: 8:00 AM - 5:00 PM</p>
-                                    <p class="mb-0 small">Saturday: 9:00 AM - 2:00 PM (By Appointment)</p>
-                                </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slideshow Dots -->
+                    <div class="slideshow-dots" id="slideshowDots">
+                        <!-- Dots will be generated by JavaScript -->
+                    </div>
+                    
+                    <!-- Slideshow Progress Bar -->
+                    <div class="slideshow-progress">
+                        <div class="slideshow-progress-bar" id="slideshowProgress"></div>
+                    </div>
+                </div>
+
+                <!-- TikTok Video Links -->
+                <div class="tiktok-video-section">
+                    <div class="section-header">
+                        <i class="fab fa-tiktok section-icon"></i>
+                        <h4 class="section-title">Project Reels on TikTok</h4>
+                    </div>
+
+                    <div class="reels-grid">
+                        <!-- Reel 1 -->
+                        <a href="https://www.tiktok.com/@woodteqphprime/video/7602092247701605639" 
+                           target="_blank" class="reel-item">
+                            <div class="tt-icon">
+                                <i class="fab fa-tiktok"></i>
                             </div>
+                            <img src="img/yes.png" class="reel-thumbnail" alt="Warehouse Project"
+                                 onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"%23121212\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"12\" text-anchor=\"middle\" fill=\"white\">Warehouse Project</text></svg>'">
+                            <div class="reel-play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <div class="reel-overlay">Warehouse Project</div>
+                            <div class="reel-badge">
+                                <i class="fab fa-tiktok"></i> TikTok
+                            </div>
+                        </a>
+
+                        <!-- Reel 2 -->
+                        <a href="https://www.tiktok.com/@woodteqphprime/video/7554563283148213522" 
+                           target="_blank" class="reel-item">
+                            <div class="tt-icon">
+                                <i class="fab fa-tiktok"></i>
+                            </div>
+                            <img src="img/no.png" class="reel-thumbnail" alt="Panglao Projects"
+                                 onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"%23121212\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"12\" text-anchor=\"middle\" fill=\"white\">Panglao Projects</text></svg>'">
+                            <div class="reel-play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <div class="reel-overlay">Panglao Projects</div>
+                            <div class="reel-badge">
+                                <i class="fab fa-tiktok"></i> TikTok
+                            </div>
+                        </a>
+
+                        <!-- Reel 3 -->
+                        <a href="https://www.tiktok.com/@woodteqphprime/video/7602090908066057479" 
+                           target="_blank" class="reel-item">
+                            <div class="tt-icon">
+                                <i class="fab fa-tiktok"></i>
+                            </div>
+                            <img src="img/he.png" class="reel-thumbnail" alt="Studio N Projects"
+                                 onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"%23121212\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"12\" text-anchor=\"middle\" fill=\"white\">Studio N Projects</text></svg>'">
+                            <div class="reel-play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <div class="reel-overlay">Studio N Projects</div>
+                            <div class="reel-badge">
+                                <i class="fab fa-tiktok"></i> TikTok
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Company Information -->
+                <div class="info-section">
+                    <div class="section-header">
+                        <i class="fas fa-info-circle section-icon"></i>
+                        <h4 class="section-title">Company Details</h4>
+                    </div>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-building info-icon"></i>
+                        <div>
+                            <strong>About Us</strong>
+                            <p class="mb-0 small">WOODTEQPH PRIME CORPORATION emerged in response to the growing demand for special setup designs in Architectural Glass and aluminum windows. Originally established as WOODTEQ WOOD PRODUCTS MANUFACTURING in March 2022, the company has evolved to include a broader scope, incorporating specializations in modular cabinetry and countertop installation.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt info-icon"></i>
+                        <div>
+                            <strong>Location</strong>
+                            <p class="mb-0 small">343 West Service Road, Poblete Compound, Sun Valley, Parañaque City</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-globe info-icon"></i>
+                        <div>
+                            <strong>Website</strong>
+                            <p class="mb-0 small">
+                                <a href="https://woodteqphprime.com" target="_blank" class="text-decoration-none" style="color: var(--accent-gold); font-weight: 500;">
+                                    Visit Official Site
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-clock info-icon"></i>
+                        <div>
+                            <strong>Business Hours</strong>
+                            <p class="mb-0 small">Monday - Sunday: 8:00 AM - 5:00 PM</p>
+                            <p class="mb-0 small">Saturday: 9:00 AM - 2:00 PM (By Appointment)</p>
                         </div>
                     </div>
                 </div>
@@ -2249,10 +1557,10 @@
                 <div class="footer-links">
                     <h5>Services</h5>
                     <ul>
-                        <li><a href="#"><i class="fas fa-hammer"></i> Custom Cabinetry</a></li>
-                        <li><a href="#"><i class="fas fa-home"></i> Residential Interiors</a></li>
-                        <li><a href="#"><i class="fas fa-building"></i> Commercial Fit-outs</a></li>
-                        <li><a href="#"><i class="fas fa-ruler-combined"></i> Architectural Design</a></li>
+                        <li><a href="#"><i class="fas fa-utensils"></i> Custom Kitchen & Cabinet</a></li>
+                        <li><a href="#"><i class="fas fa-glass-whiskey"></i> Glass Railing</a></li>
+                        <li><a href="#"><i class="fas fa-shower"></i> Shower Enclosure</a></li>
+                        <li><a href="#"><i class="fas fa-door-open"></i> Aluminum Doors & Windows</a></li>
                     </ul>
                 </div>
             </div>
@@ -2276,6 +1584,9 @@
 
     <!-- JavaScript -->
     <script>
+        // Mobile Detection
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        
         // Theme toggle functionality
         const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
@@ -2296,18 +1607,18 @@
         function generateVCard() {
             return `BEGIN:VCARD
 VERSION:3.0
-FN:Cus Marqueses
+FN:Rose Anthonette Amparo
 ORG:Woodteqph Prime Corporation
 TITLE:Sales Executive
-TEL;TYPE=WORK,VOICE:+639171234567
-EMAIL;TYPE=PREF,INTERNET:sales@woodteqphprime.com
+TEL;TYPE=WORK,VOICE:+639485387691
+EMAIL;TYPE=PREF,INTERNET:sales1.woodteqph@gmail.com
 ADR;TYPE=WORK:;;343 West Service Road, Poblete Compound, Sun Valley, Parañaque City
 URL:https://woodteqphprime.com
 NOTE:Digital Business Card - Woodteqph Prime Construction
 END:VCARD`;
         }
 
-        // Save contact function - WORKING
+        // Save contact function - Mobile Optimized
         function saveContact() {
             const vCard = generateVCard();
             
@@ -2323,7 +1634,19 @@ END:VCARD`;
             
             // Add to document, click, and remove
             document.body.appendChild(link);
-            link.click();
+            
+            // Use click for desktop, touch for mobile
+            if (isMobile) {
+                const touchEvent = new MouseEvent('click', {
+                    view: window,
+                    bubbles: true,
+                    cancelable: true
+                });
+                link.dispatchEvent(touchEvent);
+            } else {
+                link.click();
+            }
+            
             document.body.removeChild(link);
             
             // Clean up the URL object
@@ -2332,11 +1655,11 @@ END:VCARD`;
             showToast('Contact saved! Check your downloads.');
         }
 
-        // Share card function - WORKING
+        // Share card function - Mobile Optimized
         async function shareCard() {
             const shareData = {
                 title: 'Woodteqph Prime Business Card',
-                text: 'Check out this digital business card',
+                text: 'Check out this digital business card for premium construction services',
                 url: window.location.href
             };
             
@@ -2351,14 +1674,20 @@ END:VCARD`;
                 }
             } catch (err) {
                 console.log('Error sharing:', err);
-                // Final fallback
+                // Final fallback for all devices
                 const textArea = document.createElement('textarea');
                 textArea.value = window.location.href;
                 document.body.appendChild(textArea);
                 textArea.select();
-                document.execCommand('copy');
+                
+                try {
+                    document.execCommand('copy');
+                    showToast('Link copied to clipboard!');
+                } catch (copyErr) {
+                    showToast('Please copy the URL manually');
+                }
+                
                 document.body.removeChild(textArea);
-                showToast('Link copied to clipboard!');
             }
         }
 
@@ -2375,8 +1704,126 @@ END:VCARD`;
             }, 3000);
         }
 
+        // SLIDESHOW FUNCTIONALITY - Mobile Optimized
+        let currentSlide = 0;
+        let slideInterval;
+        let isPlaying = true;
+        const slideDuration = 4000; // 4 seconds per slide (faster for mobile)
+
+        function initSlideshow() {
+            const slides = document.querySelectorAll('.slideshow-slide');
+            const dotsContainer = document.getElementById('slideshowDots');
+            const progressBar = document.getElementById('slideshowProgress');
+            
+            // Create dots
+            slides.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'slideshow-dot';
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    goToSlide(index);
+                    // Give haptic feedback on mobile if available
+                    if (navigator.vibrate) {
+                        navigator.vibrate(50);
+                    }
+                });
+                dotsContainer.appendChild(dot);
+            });
+            
+            // Start autoplay
+            startSlideshow();
+            
+            // Update progress bar
+            setInterval(() => {
+                if (isPlaying) {
+                    const progress = (Date.now() % slideDuration) / slideDuration * 100;
+                    progressBar.style.width = progress + '%';
+                }
+            }, 100);
+            
+            // Handle image loading errors
+            document.querySelectorAll('.slide-image').forEach(img => {
+                img.onerror = function() {
+                    // Set a portrait placeholder
+                    this.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400"><rect width="300" height="400" fill="%23121212"/><text x="150" y="200" font-family="Arial" font-size="16" text-anchor="middle" fill="white">' + this.alt + '</text></svg>';
+                };
+            });
+        }
+
+        function goToSlide(index) {
+            const slides = document.querySelectorAll('.slideshow-slide');
+            const dots = document.querySelectorAll('.slideshow-dot');
+            
+            // Remove active class from all slides and dots
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            // Add active class to current slide and dot
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            
+            // Reset progress bar
+            document.getElementById('slideshowProgress').style.width = '0%';
+            
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            const slides = document.querySelectorAll('.slideshow-slide');
+            currentSlide = (currentSlide + 1) % slides.length;
+            goToSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            const slides = document.querySelectorAll('.slideshow-slide');
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            goToSlide(currentSlide);
+        }
+
+        function startSlideshow() {
+            if (slideInterval) clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, slideDuration);
+            isPlaying = true;
+            document.getElementById('playPauseSlide').innerHTML = '<i class="fas fa-pause"></i>';
+        }
+
+        function stopSlideshow() {
+            if (slideInterval) clearInterval(slideInterval);
+            isPlaying = false;
+            document.getElementById('playPauseSlide').innerHTML = '<i class="fas fa-play"></i>';
+        }
+
+        function toggleSlideshow() {
+            if (isPlaying) {
+                stopSlideshow();
+            } else {
+                startSlideshow();
+            }
+            // Haptic feedback on mobile
+            if (navigator.vibrate) {
+                navigator.vibrate(30);
+            }
+        }
+
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
+            // Add touch feedback for all interactive elements
+            const interactiveElements = document.querySelectorAll('.tap-card, .service-card, .slideshow-btn, .slideshow-dot, .social-icon, .footer-links a');
+            
+            interactiveElements.forEach(element => {
+                element.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.97)';
+                });
+                
+                element.addEventListener('touchend', function() {
+                    this.style.transform = '';
+                });
+                
+                element.addEventListener('touchcancel', function() {
+                    this.style.transform = '';
+                });
+            });
+
             // Event listeners for save contact
             document.getElementById('saveContactBtn').addEventListener('click', saveContact);
             document.getElementById('saveContactFooter').addEventListener('click', saveContact);
@@ -2385,37 +1832,121 @@ END:VCARD`;
             document.getElementById('shareCardBtn').addEventListener('click', shareCard);
             document.getElementById('shareCardFooter').addEventListener('click', shareCard);
             
-            // Add touch feedback
-            document.querySelectorAll('.tap-card').forEach(btn => {
-                btn.addEventListener('touchstart', () => {
-                    btn.style.transform = 'scale(0.95)';
-                });
-                btn.addEventListener('touchend', () => {
-                    btn.style.transform = '';
+            // Initialize slideshow
+            initSlideshow();
+            
+            // Slideshow controls
+            document.getElementById('prevSlide').addEventListener('click', prevSlide);
+            document.getElementById('nextSlide').addEventListener('click', nextSlide);
+            document.getElementById('playPauseSlide').addEventListener('click', toggleSlideshow);
+            
+            // Add service card interactions
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const serviceName = this.querySelector('.service-name').textContent;
+                    showToast(`Service: ${serviceName}`);
                 });
             });
             
-            // Add image error handling
-            document.querySelectorAll('img').forEach(img => {
-                img.onerror = function() {
-                    // Set a simple placeholder if image fails to load
-                    this.style.backgroundColor = '#121212';
-                    this.style.display = 'flex';
-                    this.style.alignItems = 'center';
-                    this.style.justifyContent = 'center';
-                    this.style.color = '#ffffff';
-                    this.style.fontSize = '12px';
-                    this.innerHTML = '<span>Image</span>';
-                };
+            // Add touch/swipe support for slideshow
+            let touchStartX = 0;
+            let touchEndX = 0;
+            const minSwipeDistance = 50;
+            
+            const slideshowContainer = document.getElementById('slideshowContainer');
+            
+            slideshowContainer.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+                stopSlideshow(); // Pause slideshow when user interacts
+            }, { passive: true });
+            
+            slideshowContainer.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > minSwipeDistance) {
+                    if (diff > 0) {
+                        // Swipe left - next slide
+                        nextSlide();
+                    } else {
+                        // Swipe right - previous slide
+                        prevSlide();
+                    }
+                    // Haptic feedback
+                    if (navigator.vibrate) {
+                        navigator.vibrate(30);
+                    }
+                }
+                
+                // Resume slideshow after a delay
+                setTimeout(() => {
+                    if (!isPlaying) {
+                        startSlideshow();
+                    }
+                }, 3000);
+            }, { passive: true });
+            
+            // Prevent accidental zoom on double tap
+            let lastTouchEnd = 0;
+            document.addEventListener('touchend', function(event) {
+                const now = (new Date()).getTime();
+                if (now - lastTouchEnd <= 300) {
+                    event.preventDefault();
+                }
+                lastTouchEnd = now;
+            }, false);
+            
+            // Adjust slideshow height based on screen size
+            function adjustSlideshowHeight() {
+                const slideshowContainer = document.getElementById('slideshowContainer');
+                const windowHeight = window.innerHeight;
+                const windowWidth = window.innerWidth;
+                
+                // Calculate optimal portrait height (maintain 3:4 aspect ratio)
+                if (windowWidth < windowHeight) {
+                    // Portrait mode
+                    const maxHeight = windowHeight * 0.6; // 60% of screen height
+                    slideshowContainer.style.height = Math.min(maxHeight, 600) + 'px';
+                } else {
+                    // Landscape mode - reduce height
+                    slideshowContainer.style.height = Math.min(windowHeight * 0.5, 400) + 'px';
+                }
+            }
+            
+            // Adjust on load and resize
+            adjustSlideshowHeight();
+            window.addEventListener('resize', adjustSlideshowHeight);
+            window.addEventListener('orientationchange', adjustSlideshowHeight);
+            
+            // Add image lazy loading for better performance
+            const images = document.querySelectorAll('img');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                        }
+                        observer.unobserve(img);
+                    }
+                });
+            }, {
+                rootMargin: '50px 0px',
+                threshold: 0.1
             });
             
-            // Gallery items click to view larger (optional)
-            document.querySelectorAll('.gallery-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    const imgSrc = this.querySelector('img').src;
-                    const imgAlt = this.querySelector('img').alt;
-                    showToast(`Viewing: ${imgAlt}`);
-                });
+            // Observe all images for lazy loading
+            images.forEach(img => {
+                if (!img.src.includes('data:image/svg')) {
+                    imageObserver.observe(img);
+                }
+            });
+            
+            // Prevent text selection on mobile
+            document.addEventListener('selectstart', function(e) {
+                if (isMobile) {
+                    e.preventDefault();
+                }
             });
         });
     </script>
