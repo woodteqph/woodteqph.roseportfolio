@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Company Profile | Woodteqph Prime Corporation</title>
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Engineering Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #000000;
+            --dark-black: #121212;
+            --light-black: #1a1a1a;
+            --accent-gold: #d4af37;
+            --light-gold: #f4e4aa;
+            --pure-white: #ffffff;
+            --text-light: #ffffff;
+            --text-gray: #b0b0b0;
+            --text-dark: #333333;
+            --card-bg: linear-gradient(145deg, var(--light-black) 0%, var(--dark-black) 100%);
+            --main-bg: linear-gradient(180deg, var(--dark-black) 0%, var(--primary-black) 100%);
+            --header-bg: linear-gradient(135deg, var(--primary-black) 0%, var(--dark-black) 100%);
+            --tap-card-bg: rgba(255, 255, 255, 0.05);
+            --tap-card-border: rgba(212, 175, 55, 0.1);
+        }
+        
+        .light-mode {
+            --primary-black: #ffffff;
+            --dark-black: #f8f9fa;
+            --light-black: #ffffff;
+            --accent-gold: #d4af37;
+            --light-gold: #8b6e1f;
+            --pure-white: #ffffff;
+            --text-light: #333333;
+            --text-gray: #666666;
+            --text-dark: #333333;
+            --card-bg: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            --main-bg: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+            --header-bg: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            --tap-card-bg: rgba(0, 0, 0, 0.03);
+            --tap-card-border: rgba(212, 175, 55, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-black);
+            color: var(--text-light);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+        
+        /* Touch-friendly buttons */
+        button, .btn-touch, a[role="button"] {
+            min-height: 44px;
+            min-width: 44px;
+            padding: 12px 20px;
+            font-size: 16px;
+        }
+        
+        /* Back Button */
+        .back-btn {
+            position: fixed;
+            top: max(15px, env(safe-area-inset-top));
+            left: 15px;
+            z-index: 1001;
+        }
+        
+        .back-btn a {
+            background: var(--accent-gold);
+            color: var(--primary-black);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .back-btn a:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.5);
+        }
+        
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: max(15px, env(safe-area-inset-top));
+            right: 15px;
+            z-index: 1001;
+        }
+        
+        .theme-btn {
+            background: var(--accent-gold);
+            color: var(--primary-black);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .theme-btn:active {
+            transform: scale(0.95) rotate(30deg);
+        }
+        
+        .theme-btn .fa-sun {
+            display: none;
+        }
+        
+        .light-mode .theme-btn .fa-sun {
+            display: block;
+        }
+        
+        .light-mode .theme-btn .fa-moon {
+            display: none;
+        }
+        
+        /* Header */
+        .company-header {
+            background: var(--header-bg);
+            padding: 100px 0 60px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-gold);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .company-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(212, 175, 55, 0.05) 50%, transparent 70%);
+            animation: shimmer 8s infinite linear;
+        }
+        
+        .company-header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--light-gold), var(--accent-gold));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientFlow 3s ease infinite;
+            position: relative;
+            z-index: 1;
+            padding: 0 20px;
+        }
+        
+        .company-header p {
+            color: var(--text-gray);
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            padding: 0 20px;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 20px 15px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        /* Section Styling */
+        .company-section {
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(40px);
+            padding: 0 10px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--accent-gold);
+            position: relative;
+            overflow: hidden;
+            flex-wrap: wrap;
+        }
+        
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background: var(--accent-gold);
+            border-radius: 2px;
+            animation: slideIn 1s ease-out;
+        }
+        
+        .section-icon {
+            background: var(--accent-gold);
+            color: var(--primary-black);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transform: scale(0);
+            animation: scaleIn 0.6s 0.3s ease-out forwards;
+            flex-shrink: 0;
+        }
+        
+        .section-title {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 700;
+            color: var(--text-light);
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: slideRight 0.8s 0.5s ease-out forwards;
+        }
+        
+        /* Content Cards */
+        .content-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid var(--tap-card-border);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .content-card.animated {
+            animation: fadeUp 0.8s ease forwards;
+        }
+        
+        .content-card h3 {
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .content-card p {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.7;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        
+        .content-card.animated p {
+            animation: fadeInUp 0.8s 0.3s ease forwards;
+        }
+        
+        /* Mission & Vision Cards */
+        .mission-vision-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .mission-vision-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+        }
+        
+        .mv-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid var(--tap-card-border);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mv-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.7s ease;
+        }
+        
+        .mv-card:hover::before {
+            left: 100%;
+        }
+        
+        .mv-card.animated {
+            animation: cardPopIn 0.8s ease forwards;
+        }
+        
+        .mv-card:active {
+            transform: translateY(-5px) scale(1.02);
+        }
+        
+        @media (hover: hover) {
+            .mv-card:hover {
+                transform: translateY(-10px) scale(1.02);
+                box-shadow: 0 15px 35px rgba(212, 175, 55, 0.15);
+            }
+        }
+        
+        .mv-icon {
+            font-size: 40px;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            display: inline-block;
+            transform: scale(0);
+        }
+        
+        .mv-card.animated .mv-icon {
+            animation: iconPop 0.6s 0.4s ease forwards;
+        }
+        
+        .mv-card h3 {
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        
+        .mv-card.animated h3 {
+            animation: fadeInUp 0.6s 0.6s ease forwards;
+        }
+        
+        .mv-card p {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.7;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        
+        .mv-card.animated p {
+            animation: fadeInUp 0.6s 0.8s ease forwards;
+        }
+        
+        /* Management Team - Centered 3 Cards */
+        .management-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin-top: 20px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        @media (min-width: 576px) {
+            .management-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .management-grid {
+                grid-template-columns: repeat(3, 1fr);
+                max-width: 1000px;
+            }
+        }
+        
+        .management-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            text-align: center;
+            border: 1px solid var(--tap-card-border);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            position: relative;
+        }
+        
+        .management-card.animated {
+            animation: cardSlideUp 0.8s ease forwards;
+        }
+        
+        .management-card:active {
+            transform: translateY(-5px);
+        }
+        
+        @media (hover: hover) {
+            .management-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 35px rgba(212, 175, 55, 0.15);
+            }
+        }
+        
+        .management-img-container {
+            position: relative;
+            overflow: hidden;
+            height: 250px;
+            background: var(--dark-black);
+        }
+        
+        @media (min-width: 768px) {
+            .management-img-container {
+                height: 280px;
+            }
+        }
+        
+        .management-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: var(--dark-black);
+            transition: transform 0.6s ease;
+        }
+        
+        .management-card:active .management-img,
+        .management-card:hover .management-img {
+            transform: scale(1.05);
+        }
+        
+        .management-info {
+            padding: 20px 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .management-info h4 {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        
+        .management-card.animated .management-info h4 {
+            animation: fadeInUp 0.6s 0.4s ease forwards;
+        }
+        
+        .management-info p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        
+        .management-card.animated .management-info p {
+            animation: fadeInUp 0.6s 0.6s ease forwards;
+        }
+        
+        /* Machines Grid - 4 Cards */
+        .machines-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin-top: 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        @media (min-width: 576px) {
+            .machines-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .machines-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        .machine-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--tap-card-border);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateY(40px) scale(0.9);
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .machine-card.animated {
+            animation: machineCardPop 0.8s ease forwards;
+        }
+        
+        .machine-card:active {
+            transform: translateY(-8px) scale(1.02);
+        }
+        
+        @media (hover: hover) {
+            .machine-card:hover {
+                transform: translateY(-15px) scale(1.02);
+                box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+            }
+            
+            .machine-card:hover .machine-img {
+                transform: scale(1.05);
+            }
+        }
+        
+        .machine-img-container {
+            position: relative;
+            overflow: hidden;
+            height: 220px;
+            background: var(--dark-black);
+            flex-shrink: 0;
+        }
+        
+        @media (min-width: 768px) {
+            .machine-img-container {
+                height: 250px;
+            }
+        }
+        
+        .machine-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+        
+        .machine-card:active .machine-img {
+            transform: scale(1.05);
+        }
+        
+        .machine-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 15px;
+            transform: translateY(100%);
+            transition: transform 0.5s ease;
+        }
+        
+        .machine-card:active .machine-overlay,
+        .machine-card:hover .machine-overlay {
+            transform: translateY(0);
+        }
+        
+        .machine-info {
+            padding: 20px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .machine-info h4 {
+            color: var(--accent-gold);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        
+        .machine-card.animated .machine-info h4 {
+            animation: fadeInUp 0.6s 0.3s ease forwards;
+        }
+        
+        .machine-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            opacity: 0;
+            transform: translateY(10px);
+            margin-bottom: 0;
+        }
+        
+        .machine-card.animated .machine-info p {
+            animation: fadeInUp 0.6s 0.5s ease forwards;
+        }
+        
+        /* Engineering Icons for Machines */
+        .machine-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--accent-gold);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            z-index: 2;
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--accent-gold);
+        }
+        
+        /* Footer */
+        .company-footer {
+            background: var(--primary-black);
+            padding: 40px 0 30px;
+            border-top: 2px solid var(--accent-gold);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .company-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(212, 175, 55, 0.03) 50%, transparent 70%);
+            animation: shimmer 10s infinite linear reverse;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-links a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            min-height: 44px;
+            min-width: 44px;
+            border: 1px solid var(--tap-card-border);
+        }
+        
+        .footer-links a:active {
+            background: var(--accent-gold);
+            color: var(--primary-black);
+            transform: scale(0.95);
+        }
+        
+        @media (hover: hover) {
+            .footer-links a:hover {
+                background: var(--accent-gold);
+                color: var(--primary-black);
+                transform: scale(1.05);
+            }
+        }
+        
+        .copyright {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            position: relative;
+            z-index: 1;
+            padding: 0 15px;
+        }
+        
+        .copyright p {
+            margin-bottom: 5px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 576px) {
+            .company-header {
+                padding: 80px 0 40px;
+            }
+            
+            .section-header {
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+            
+            .section-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+            
+            .content-card, .mv-card {
+                padding: 20px;
+            }
+            
+            .management-img-container {
+                height: 220px;
+            }
+            
+            .machine-img-container {
+                height: 200px;
+            }
+            
+            .footer-links {
+                gap: 10px;
+            }
+            
+            .footer-links a {
+                padding: 10px 15px;
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .management-grid,
+            .machines-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        /* Safe area for notch phones */
+        @supports (padding: max(0px)) {
+            .company-header {
+                padding-top: max(100px, env(safe-area-inset-top) + 60px);
+            }
+        }
+        
+        /* Animation Keyframes */
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        @keyframes gradientFlow {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+        
+        @keyframes slideIn {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100px;
+            }
+        }
+        
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes slideRight {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes cardPopIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            60% {
+                transform: translateY(-5px) scale(1.02);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        @keyframes iconPop {
+            0% {
+                transform: scale(0);
+            }
+            70% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes cardSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes machineCardPop {
+            0% {
+                opacity: 0;
+                transform: translateY(40px) scale(0.9);
+            }
+            70% {
+                transform: translateY(-10px) scale(1.02);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        /* Animation Delays */
+        .delay-1 { animation-delay: 0.2s !important; }
+        .delay-2 { animation-delay: 0.4s !important; }
+        .delay-3 { animation-delay: 0.6s !important; }
+        .delay-4 { animation-delay: 0.8s !important; }
+        
+        /* Loading animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-black);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--tap-card-border);
+            border-top: 4px solid var(--accent-gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="back-btn">
+        <a href="index.html" aria-label="Go back to home">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+    </div>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+            <i class="fas fa-moon"></i>
+            <i class="fas fa-sun"></i>
+        </button>
+    </div>
+
+    <!-- Header -->
+    <header class="company-header">
+        <div class="container">
+            <h1>Company Profile</h1>
+            <p>WOODTEQPH PRIME CORPORATION - Leading the way in premium construction solutions</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Background Section -->
+        <section id="background" class="company-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-history"></i>
+                </div>
+                <h2 class="section-title">Background</h2>
+            </div>
+            
+            <div class="content-card">
+                <p>WOODTEQPH PRIME CORPORATION emerged in response to the growing demand for special setup designs in Architectural Glass and aluminum windows. Originally established as WOODTEQ WOOD PRODUCTS MANUFACTURING in March 2022, the company has evolved to include a broader scope, incorporating specializations in modular cabinetry and countertop installation.</p>
+                <p style="margin-top: 20px;">This expansion is driven by the collaboration of strong technical skills, effective management, and strategic marketing approaches.</p>
+            </div>
+        </section>
+
+        <!-- Mission & Vision Section -->
+        <section id="mission" class="company-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <h2 class="section-title">Mission & Vision</h2>
+            </div>
+            
+            <div class="mission-vision-grid">
+                <div class="mv-card">
+                    <div class="mv-icon">
+                        <i class="fas fa-flag"></i>
+                    </div>
+                    <h3>Our Mission</h3>
+                    <p>To deliver high-quality kitchen cabinets, wardrobes, aluminum glass doors and window products that bring our customers' visions to life, while nurturing employee growth, contributing to the nation's development, and creating lasting value for our communities.</p>
+                </div>
+                
+                <div class="mv-card delay-1">
+                    <div class="mv-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>Our Vision</h3>
+                    <p>To be the leading provider of quality craftsmanship and innovation in the country, transforming homes and empowering employees to grow, while making a positive impact on the country's economic and social development.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Management Team Section -->
+        <section id="management" class="company-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h2 class="section-title">Our Management</h2>
+            </div>
+            
+            <div class="management-grid">
+                <!-- CEO -->
+                <div class="management-card">
+                    <div class="management-img-container">
+                        <img src="img/team-2.jpg" 
+                             alt="Chief Executive Officer - Arnel Delos Reyes"
+                             class="management-img"
+                             ">
+                    </div>
+                    <div class="management-info">
+                        <h4>Chief Executive Officer</h4>
+                        <p>Arnel Delos Reyes</p>
+                    </div>
+                </div>
+                
+                <!-- Vice President -->
+                <div class="management-card delay-1">
+                    <div class="management-img-container">
+                        <img src="img/team-1.JPG" 
+                             alt="Vice President - Josephine Del Rosario"
+                             class="management-img"
+                            ">
+                    </div>
+                    <div class="management-info">
+                        <h4>Vice President</h4>
+                        <p>Josephine Del Rosario</p>
+                    </div>
+                </div>
+                
+                <!-- CFO -->
+                <div class="management-card delay-2">
+                    <div class="management-img-container">
+                        <img src="img/team-3.png" 
+                             alt="Chief Financial Officer - Ariel Delos Reyes"
+                             class="management-img"
+                             ">
+                    </div>
+                    <div class="management-info">
+                        <h4>Chief Financial Officer</h4>
+                        <p>Ariel Delos Reyes</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Machines Section -->
+        <section id="machines" class="company-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h2 class="section-title">Our Machines</h2>
+            </div>
+            
+            <div class="machines-grid">
+                <!-- CNC Router Machine -->
+                <div class="machine-card">
+                    <div class="machine-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <div class="machine-img-container">
+                        <img src="img/12.jpg" 
+                             alt="CNC Router Machine"
+                             class="machine-img"
+                             loading="lazy"
+                           ">
+                        <div class="machine-overlay">
+                            <h4 style="color: white; margin-bottom: 5px;">CNC Router Machine</h4>
+                            <p style="color: #ddd; font-size: 12px;">Computer-controlled precision routing</p>
+                        </div>
+                    </div>
+                    <div class="machine-info">
+                        <h4>CNC Router Machine</h4>
+                        <p>Advanced computer-controlled routing for precise cutting, drilling, and carving of wood and composite materials.</p>
+                    </div>
+                </div>
+                
+                <!-- Side Drilling Machine -->
+                <div class="machine-card delay-1">
+                    <div class="machine-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <div class="machine-img-container">
+                        <img src="img/14.jpg" 
+                             alt="Side Drilling Machine"
+                             class="machine-img"
+                             loading="lazy"
+                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 300 250\"><rect width=\"300\" height=\"250\" fill=\"%23121212\"/><text x=\"150\" y=\"125\" font-family=\"Arial\" font-size=\"16\" text-anchor=\"middle\" fill=\"%23d4af37\" dy=\".3em\">Side Drilling</text></svg>'">
+                        <div class="machine-overlay">
+                            <h4 style="color: white; margin-bottom: 5px;">Side Drilling Machine</h4>
+                            <p style="color: #ddd; font-size: 12px;">Precision horizontal drilling</p>
+                        </div>
+                    </div>
+                    <div class="machine-info">
+                        <h4>Side Drilling Machine</h4>
+                        <p>Specialized equipment for accurate horizontal drilling and boring operations on cabinet sides and panels.</p>
+                    </div>
+                </div>
+                
+                <!-- Edge Banding Machine -->
+                <div class="machine-card delay-2">
+                    <div class="machine-icon">
+                        <i class="fas fa-border-style"></i>
+                    </div>
+                    <div class="machine-img-container">
+                        <img src="img/regular.jpg" 
+                             alt="Edge Banding Machine"
+                             class="machine-img"
+                             loading="lazy"
+                             ">
+                        <div class="machine-overlay">
+                            <h4 style="color: white; margin-bottom: 5px;">Edge Banding Machine</h4>
+                            <p style="color: #ddd; font-size: 12px;">Professional edge finishing</p>
+                        </div>
+                    </div>
+                    <div class="machine-info">
+                        <h4>Edge Banding Machine</h4>
+                        <p>Automatic application of edge banding strips for clean, professional finishing on cabinet edges.</p>
+                    </div>
+                </div>
+                
+                <!-- Irregular Edgebanding Machine -->
+                <div class="machine-card delay-3">
+                    <div class="machine-icon">
+                        <i class="fas fa-shapes"></i>
+                    </div>
+                    <div class="machine-img-container">
+                        <img src="img/13.jpg" 
+                             alt="Irregular Edgebanding Machine"
+                             class="machine-img"
+                             loading="lazy"
+                            ">
+                        <div class="machine-overlay">
+                            <h4 style="color: white; margin-bottom: 5px;">Irregular Edgebanding Machine</h4>
+                            <p style="color: #ddd; font-size: 12px;">Complex edge processing</p>
+                        </div>
+                    </div>
+                    <div class="machine-info">
+                        <h4>Irregular Edgebanding Machine</h4>
+                        <p>Specialized equipment for applying edge banding to curved and irregular shapes with perfect precision.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="company-footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="index.html" aria-label="Go to home page">Home</a>
+                <a href="tel:+639485387691" aria-label="Call us">Contact Us</a>
+                <a href="mailto:sales1.woodteqph@gmail.com" aria-label="Send email">Email</a>
+            </div>
+            <div class="copyright">
+                <p>© 2022 Woodteqph Prime Corporation. All rights reserved.</p>
+                <p>Developed By: | Haciel Casihan Woodteqph IT</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced mobile-friendly JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hide loading screen
+            setTimeout(() => {
+                const loading = document.getElementById('loading');
+                loading.style.opacity = '0';
+                setTimeout(() => {
+                    loading.style.display = 'none';
+                }, 500);
+            }, 500);
+
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
+            
+            // Check saved theme or prefer-color-scheme
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const savedTheme = localStorage.getItem('woodteqphTheme');
+            
+            if (savedTheme === 'light') {
+                body.classList.add('light-mode');
+            } else if (savedTheme === 'dark') {
+                body.classList.remove('light-mode');
+            } else if (!prefersDark) {
+                body.classList.add('light-mode');
+                localStorage.setItem('woodteqphTheme', 'light');
+            }
+            
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('light-mode');
+                const currentTheme = body.classList.contains('light-mode') ? 'light' : 'dark';
+                localStorage.setItem('woodteqphTheme', currentTheme);
+            });
+
+            // Touch-friendly interaction
+            themeToggle.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                this.style.transform = 'scale(0.95)';
+            });
+            
+            themeToggle.addEventListener('touchend', function() {
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+
+            // Enhanced Intersection Observer
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        // Animate the section
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        
+                        // Stagger animations for cards
+                        const cards = entry.target.querySelectorAll('.content-card, .mv-card, .management-card, .machine-card');
+                        cards.forEach((card, cardIndex) => {
+                            setTimeout(() => {
+                                card.classList.add('animated');
+                            }, cardIndex * 100);
+                        });
+                        
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all sections
+            document.querySelectorAll('.company-section').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Image lazy loading
+            const imageObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                        }
+                        img.style.opacity = '0';
+                        img.style.transition = 'opacity 0.5s ease';
+                        
+                        setTimeout(() => {
+                            img.style.opacity = '1';
+                        }, 100);
+                        
+                        imageObserver.unobserve(img);
+                    }
+                });
+            }, {
+                rootMargin: '50px 0px',
+                threshold: 0.1
+            });
+
+            // Observe all images
+            document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+                imageObserver.observe(img);
+            });
+
+            // Add touch feedback for interactive elements
+            const touchElements = document.querySelectorAll('.mv-card, .management-card, .machine-card, .footer-links a');
+            
+            touchElements.forEach(el => {
+                el.addEventListener('touchstart', function() {
+                    this.style.transition = 'transform 0.1s ease';
+                    this.style.transform = 'scale(0.98)';
+                });
+                
+                el.addEventListener('touchend', function() {
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+
+            // Prevent zoom on double-tap
+            let lastTouchEnd = 0;
+            document.addEventListener('touchend', function(event) {
+                const now = (new Date()).getTime();
+                if (now - lastTouchEnd <= 300) {
+                    event.preventDefault();
+                }
+                lastTouchEnd = now;
+            }, false);
+
+            // Handle orientation change
+            window.addEventListener('orientationchange', function() {
+                // Add a small delay to allow CSS to update
+                setTimeout(() => {
+                    window.scrollTo(0, 0);
+                }, 100);
+            });
+
+            // Add scroll progress indicator for desktop
+            if (window.innerWidth > 768) {
+                const scrollProgress = document.createElement('div');
+                scrollProgress.style.position = 'fixed';
+                scrollProgress.style.top = '0';
+                scrollProgress.style.left = '0';
+                scrollProgress.style.height = '3px';
+                scrollProgress.style.background = 'var(--accent-gold)';
+                scrollProgress.style.width = '0%';
+                scrollProgress.style.zIndex = '10000';
+                scrollProgress.style.transition = 'width 0.1s';
+                document.body.appendChild(scrollProgress);
+
+                window.addEventListener('scroll', () => {
+                    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrolled = (winScroll / height) * 100;
+                    scrollProgress.style.width = scrolled + '%';
+                });
+            }
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerOffset = 80;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Handle keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    // Close any open modals or menus
+                    document.activeElement.blur();
+                }
+            });
+
+            // Check for reduced motion preference
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+            if (prefersReducedMotion.matches) {
+                // Disable animations
+                document.querySelectorAll('*').forEach(el => {
+                    el.style.animation = 'none !important';
+                    el.style.transition = 'none !important';
+                });
+            }
+        });
+
+        // Handle resize events efficiently
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                // Update any layout-dependent elements here
+            }, 250);
+        });
+
+        // Error handling for images
+        document.addEventListener('error', function(e) {
+            if (e.target.tagName === 'IMG') {
+                // Image failed to load
+                console.log('Image failed to load:', e.target.src);
+            }
+        }, true);
+    </script>
+</body>
+</html>
